@@ -21,9 +21,4 @@ in the Javascript code to make it as scalable and resuable as can be!
 ## Deployment
 
 This project is deployed on GitHub Pages:
-
-<<<<<<< HEAD
 - https://seroujk.github.io/se_project_todo-app/
-=======
-- https://seroujk.github.io/se_project_todo-app/
->>>>>>> f66214c4636f44bbf46c0bb57db385173bf4b374
