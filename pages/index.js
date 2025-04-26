@@ -10,10 +10,11 @@ const todoTemplate = document.querySelector("#todo-template");
 const todosList = document.querySelector(".todos__list");
 
 const formValidator = new FormValidator(validationConfig,addTodoForm);
+formValidator.enableValidation();
 
 const openModal = (modal) => {
   modal.classList.add("popup_visible");
-  formValidator.enableValidation();
+ 
 };
 
 const closeModal = (modal) => {
@@ -36,22 +37,28 @@ addTodoCloseBtn.addEventListener("click", () => {
   closeModal(addTodoPopup);
 });
 
+const renderTodo = (item,todoConfig) => {
+  const todo = generateTodo(item,todoConfig);
+  todosList.append(todo);
+};
+
+
 addTodoForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
   const name = evt.target.name.value;
   const dateInput = evt.target.date.value;
-
+  const id = evt.target.id;
   // Create a date object and adjust for timezone
   const date = new Date(dateInput);
   date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
-  const values = { name, date };
-  const todo = generateTodo(values,todoConfig);
-  todosList.append(todo);
+
+  const values = { name, date, id };
+  renderTodo(values,todoConfig);
   closeModal(addTodoPopup);
   formValidator.resetValidation();
 });
 
 initialTodos.forEach((item) => {
-  const todo = generateTodo(item,todoConfig);
-  todosList.append(todo);
+  renderTodo(item,todoConfig);
 });
+
