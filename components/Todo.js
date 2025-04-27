@@ -30,15 +30,8 @@ class Todo {
     todoCheckboxEl.checked = this._data.completed;
     todoCheckboxEl.id = `todo-${this._data.id}`;
     todoLabelEl.setAttribute("for", `todo-${uuidv4()}`);
+    this._generateDateEl(todoDateEl);
 
-    const dueDate = new Date(this._data.date);
-    if (!isNaN(dueDate)) {
-      todoDateEl.textContent = `Due: ${dueDate.toLocaleString("en-US", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      })}`;
-    }
     this._setEventListeners(todoDeleteBtnEl, todoElement);
     return todoElement;
   }
@@ -57,6 +50,17 @@ class Todo {
 
   _getDateEl(todoElement) {
     return todoElement.querySelector(this._todoConfig.todoDate);
+  }
+
+  _generateDateEl(todoDateEl) {
+    const dueDate = new Date(this._data.date);
+    if (!isNaN(dueDate)) {
+      todoDateEl.textContent = `Due: ${dueDate.toLocaleString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      })}`;
+    }
   }
 
   _getDeleteBtnEl(todoElement) {
