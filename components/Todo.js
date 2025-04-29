@@ -29,7 +29,7 @@ class Todo {
     todoNameEl.textContent = this._data.name;
     todoCheckboxEl.checked = this._data.completed;
     todoCheckboxEl.id = `todo-${this._data.id}`;
-    todoLabelEl.setAttribute("for", `todo-${uuidv4()}`);
+    todoLabelEl.setAttribute("for", `todo-${this._data.id}`);
     this._generateDateEl(todoDateEl);
 
     this._setEventListeners(todoDeleteBtnEl, todoElement);
