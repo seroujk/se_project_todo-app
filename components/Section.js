@@ -1,4 +1,4 @@
-import { todoConfig } from "./constants.js";
+import { todoConfig } from "../utils/constants.js";
 
 class Section {
   constructor({ items, renderer, containerSelector }) {

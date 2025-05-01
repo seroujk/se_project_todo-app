@@ -9,11 +9,10 @@ class TodoCounter {
   updateCompleted(increment) {
     if (increment) {
       this._completed += 1;
-      this._updateText();
     } else {
       this._completed -= 1;
-      this._updateText();
     }
+    this._updateText();
   }
 
   updateTotal(increment) {
