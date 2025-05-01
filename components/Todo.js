@@ -1,18 +1,26 @@
-import { v4 as uuidv4 } from "https://jspm.dev/uuid";
-
 class Todo {
-  constructor(data, selector, todoConfig) {
+  constructor(data, selector, todoConfig, handleCheck, handleDelete) {
     this._data = data;
     this._templateElement = document.querySelector(selector);
     this._todoConfig = todoConfig;
+    this._handleCheck = handleCheck;
+    this._completed = data.completed;
+    this._handleDelete = handleDelete;
   }
 
-  _setEventListeners(todoDeleteBtn, todoElement) {
-    // Add an event listener to the delete button of each todo item
-    todoDeleteBtn.addEventListener("click", () => {
+  _setEventListeners(todoDeleteBtnEl, todoCheckboxEl, todoElement) {
+    todoDeleteBtnEl.addEventListener("click", () => {
       todoElement.remove();
+      this._handleDelete(false);
+      if (this._completed) {
+        this._handleCheck(false);
+      }
     });
-    // Nothing added for the checkbox button as the browser handles that automatically
+    todoCheckboxEl.addEventListener("change", (event) => {
+      const isChecked = event.target.checked;
+      this._completed = isChecked;
+      this._handleCheck(isChecked);
+    });
   }
 
   getView() {
@@ -32,7 +40,7 @@ class Todo {
     todoLabelEl.setAttribute("for", `todo-${this._data.id}`);
     this._generateDateEl(todoDateEl);
 
-    this._setEventListeners(todoDeleteBtnEl, todoElement);
+    this._setEventListeners(todoDeleteBtnEl, todoCheckboxEl, todoElement);
     return todoElement;
   }
 

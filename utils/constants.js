@@ -30,6 +30,8 @@ const validationConfig = {
 
 // A more scalable approach to the todo element instead of hardcoding the class names
 const todoConfig = {
+  todoContainer: ".todos__list",
+  todoTemplateSelector:"#todo-template",
   todoClass: ".todo",
   todoNameElement: ".todo__name",
   todoCheckboxEl: ".todo__completed",
